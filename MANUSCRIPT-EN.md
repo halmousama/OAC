@@ -2,6 +2,17 @@
 
 ---
 
+### **Table of Contents**
+
+1.  [Chapter 1: Introduction - Beyond Monolithic Models](#chapter-1-introduction---beyond-monolithic-models)
+2.  [Chapter 2: The Hierarchical Organizational Structure](#chapter-2-the-hierarchical-organizational-structure)
+3.  [Chapter 3: The Memory Ecosystem](#chapter-3-the-memory-ecosystem)
+4.  [Chapter 4: The Evolutionary Engine - Learning Through Experience](#chapter-4-the-evolutionary-engine---learning-through-experience)
+5.  [Chapter 5: Conceptual Case Study - Building an Interactive Analysis of a Scientific Hypothesis](#chapter-5-conceptual-case-study---building-an-interactive-analysis-of-a-scientific-hypothesis)
+6.  [Chapter 6: Conclusion - The Path Towards a More Integrated AI](#chapter-6-conclusion---the-path-towards-a-more-integrated-ai)
+
+---
+
 ### **Chapter 1: Introduction - Beyond Monolithic Models**
 
 **1.1 The Dawn and Era of AI Giants: The Limits of the Current Paradigm**
@@ -91,6 +102,27 @@ At the base of the pyramid are the "Tools." These are not intelligent entities b
 
 For this hierarchical structure to function smoothly, communication cannot be based on ambiguous natural language. Instead, entities must communicate via a strict, structured, and machine-readable **Internal Communication Protocol (ICP)**. This protocol is the organization's machine language, designed for precision, clarity, and traceability.
 
+```mermaid
+sequenceDiagram
+    actor M as Manager
+    participant A as Specialist Agent
+
+    M->>A: 1. Delegate Task (e.g., Analyze Data)
+    activate A
+    Note over M,A: Task sent via A2A Protocol
+    A-->>M: 2. Acknowledge Task (Status: PENDING)
+    deactivate A
+    
+    Note right of M: Manager is now free to<br/>perform other tasks...
+
+    activate A
+    A-->>M: 3. Progress Update (Status: IN_PROGRESS, 25%)
+    Note right of A: Agent performs complex<br/>computation/tool use...
+    A-->>M: 4. Progress Update (Status: IN_PROGRESS, 75%)
+    A->>M: 5. Task Complete (Status: COMPLETED, with result payload)
+    deactivate A
+```
+
 We propose the adoption of the **A2A (Agent-to-Agent) Protocol** as the central nervous system of the OAC system. A2A provides an ideal framework that perfectly embodies the principles we seek:
 *   **Task-Centric Operations:** The protocol revolves around the concept of a "Task" which has a clear lifecycle (from creation to completion or failure), perfectly matching our model of task delegation from the Manager to the Agents.
 *   **Structured Contracts via Schemas:** A2A enforces the use of schemas to define the inputs and outputs of each task. This ensures that communication between the Manager and Agents is unambiguous and follows a strict contract.
@@ -106,6 +138,50 @@ It is important to distinguish the hierarchical structure proposed in the OAC fr
 ### **Chapter 3: The Memory Ecosystem**
 
 Having designed the "Reasoning Mind" in the previous chapter, we will now design the "Library" with which it will interact. An organization, no matter how efficient its structure, is useless without an effective institutional memory. Current language models face a systemic "memory crisis"; they suffer from contextual amnesia in long conversations and lack a true mechanism for continuous learning. The solution proposed by the OAC framework is not a desperate attempt to infinitely expand the "context window," but the design of a **multi-layered memory ecosystem**, which closely mimics the flexibility and efficiency of human memory (from sensory, to short-term, to long-term), and is managed by a specialized entity.
+
+```mermaid
+graph TD
+    subgraph "Reasoning Core"
+        M["fa:fa-sitemap The Manager"]
+    end
+
+    subgraph "Centralized Knowledge Access"
+        MA["**fa:fa-archive Memory Agent**<br/>(The Central Archivist)"]
+    end
+    
+    M -- "Information Request (A2A)" --> MA
+
+    subgraph "Hierarchical Search Flow"
+        L1["**L1: Short-Term Memory**<br/>fa:fa-bolt Active Task"]
+        L2["**L2: Medium-Term Memory**<br/>fa:fa-folder-open Project Cache"]
+        L3_VDBs["**L3: Vector Databases**<br/>fa:fa-database Semantic Search"]
+        L3_KG["**L3: Knowledge Graph**<br/>fa:fa-share-alt Relational Search"]
+        L4["**L4: Data Lake**<br/>fa:fa-cloud Deep Archive Search"]
+    end
+    
+    subgraph "Personalization"
+        UPM["**User Preferences**<br/>fa:fa-user-cog"]
+    end
+
+    MA --> L1
+    L1 --> L2
+    L2 --> L3_VDBs
+    L2 --> L3_KG
+    L3_VDBs --> L4
+    L3_KG --> L4
+    
+    MA -- "Consults for Personalization" --> UPM
+
+    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef memory_agent fill:#98FB98,stroke:#333,stroke-width:2px;
+    classDef memory_layer fill:#F5F5DC,stroke:#333,stroke-width:1px;
+    classDef personalization fill:#D8BFD8,stroke:#333,stroke-width:1px;
+
+    class M manager;
+    class MA memory_agent;
+    class L1,L2,L3_VDBs,L3_KG,L4 memory_layer;
+    class UPM personalization;
+```
 
 **3.1 The "Memory Agent": The Central Archivist**
 
@@ -151,6 +227,30 @@ This hierarchical system ensures that 99% of requests are served with extreme sp
 ### **Chapter 4: The Evolutionary Engine - Learning Through Experience**
 
 A system that does not learn from its successes and failures is a system doomed to stagnation. The true power of the OAC framework lies not only in its organizational structure or its multi-layered memory but in its integrated **evolutionary engine**. This engine, based primarily on the principles of Reinforcement Learning and reflective mechanisms, is the mechanism that allows the system to self-improve, develop a strategic "intuition," and uniquely personalize its interactions for each user. It transforms the system from a smart executor of rules into a genuine learner.
+
+```mermaid
+graph TD
+    subgraph "Environment (User, Agents, Memory)"
+        S["**fa:fa-map-signs State**<br/>(User query, current context)"]
+        R["**fa:fa-trophy Reward**<br/>(User feedback, efficiency score)"]
+    end
+    
+    subgraph "The Manager (RL Agent)"
+        M["**fa:fa-sitemap Manager's Policy**<br/>(Decision-making logic)"]
+        A["**fa:fa-play-circle Action**<br/>(e.g., Delegate to Code Agent)"]
+    end
+    
+    S -- "Observe" --> M
+    M -- "Choose Action based on Policy" --> A
+    A -- "Execute Action in Environment" --> R
+    R -- "Update Policy based on Reward" --> M
+    
+    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef env fill:#F0F8FF,stroke:#333,stroke-width:1px;
+    
+    class S,R env;
+    class M,A manager;
+```
 
 **4.1 The Manager as a Reinforcement Learning Agent: Mastering the Art of Management**
 
@@ -201,6 +301,57 @@ By separating this function, we mimic a real company's "Quality Assurance & Stra
 ### **Chapter 5: Conceptual Case Study - Building an Interactive Analysis of a Scientific Hypothesis**
 
 To demonstrate the full potential of the OAC framework, we will apply it to a problem that transcends the capabilities of any monolithic language model. The problem is a composite task that requires scientific investigation, data synthesis, and the development of an interactive user interface to present the results.
+
+#### **Case Study Flowchart: Multi-track Task Execution**
+
+```mermaid
+graph TD
+    subgraph "Phase 1: Planning & Decomposition"
+        Start("User Request:<br/>'Analyze Hypothesis & Build Interactive UI'")
+        M1["Manager:<br/>Decompose into Scientific & Technical tracks"]
+    end
+
+    subgraph "Phase 2: Parallel Execution"
+        subgraph "Scientific Research Track"
+            SA1["Astro Agent:<br/>Get Superflare Data"]
+            SA2["Geology Agent:<br/>Get Extinction Data"]
+            SA3["Atmosphere Agent:<br/>Find Causal Link"]
+            SA4["Data Analysis Agent:<br/>Synthesize to JSON"]
+        end
+        subgraph "Technical Development Track"
+            TA1["Frontend Agent:<br/>Design UI (HTML/CSS)"]
+            TA2["Frontend Agent:<br/>Build Interactive Logic (JS)"]
+        end
+    end
+
+    subgraph "Phase 3: Integration & Delivery"
+        M2["Manager:<br/>Synthesize Final Report"]
+        End("Final Product:<br/>Report + Interactive HTML file")
+    end
+
+    Start --> M1
+    M1 --> SA1 & SA2
+    SA1 & SA2 --> SA3
+    SA3 --> SA4
+    M1 --> TA1
+    
+    %% Dependency Link: Technical track waits for data from the scientific track
+    SA4 -- "Structured Data (JSON)" --> TA2
+    
+    TA1 --> TA2
+    TA2 -- "Bundled HTML File" --> M2
+    SA4 -- "Scientific Findings" --> M2
+    M2 --> End
+
+    classDef phase fill:#FFFACD,stroke:#333,stroke-width:2px;
+    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef agent fill:#90EE90,stroke:#333,stroke-width:1px;
+    classDef final fill:#FFD700,stroke:#333,stroke-width:2px;
+
+    class Start,End final;
+    class M1,M2 manager;
+    class SA1,SA2,SA3,SA4,TA1,TA2 agent;
+```
 
 **The Problem Posed by a User (an Astrobiologist):**
 > "I am investigating a new hypothesis. Could there be a correlation between extreme solar activity cycles (Superflares) and minor extinction events on Earth over the last 500 million years? I need a preliminary assessment of this hypothesis, **and please present the findings in an interactive web page (HTML/CSS/JS) with a timeline that allows a user to explore the data themselves.**"

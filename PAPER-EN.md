@@ -29,12 +29,77 @@ OAC is a **System of Systems** with a clear separation of concerns:
 
 ### 3.2 Communication Protocol
 
+```mermaid
+sequenceDiagram
+    actor M as Manager
+    participant A as Specialist Agent
+
+    M->>A: 1. Delegate Task (e.g., Analyze Data)
+    activate A
+    Note over M,A: Task sent via A2A Protocol
+    A-->>M: 2. Acknowledge Task (Status: PENDING)
+    deactivate A
+    
+    Note right of M: Manager is now free to<br/>perform other tasks...
+
+    activate A
+    A-->>M: 3. Progress Update (Status: IN_PROGRESS, 25%)
+    Note right of A: Agent performs complex<br/>computation/tool use...
+    A-->>M: 4. Progress Update (Status: IN_PROGRESS, 75%)
+    A->>M: 5. Task Complete (Status: COMPLETED, with result payload)
+    deactivate A
+```
+
 To ensure reliable and traceable coordination, all internal communication adheres to the **A2A (Agent-to-Agent) Protocol**. This provides:
 *   **Task-Centric Structure:** Every delegation is a formal "Task" with a clear lifecycle.
 *   **Schema-Enforced Contracts:** Inputs and outputs are strictly defined, eliminating ambiguity.
 *   **Asynchronous & Event-Driven Flow:** Enabling parallel task execution and non-blocking operations, which is crucial for efficiency.
 
 ### 3.3 Memory Ecosystem
+
+```mermaid
+graph TD
+    subgraph "Reasoning Core"
+        M["fa:fa-sitemap The Manager"]
+    end
+
+    subgraph "Centralized Knowledge Access"
+        MA["**fa:fa-archive Memory Agent**<br/>(The Central Archivist)"]
+    end
+    
+    M -- "Information Request (A2A)" --> MA
+
+    subgraph "Hierarchical Search Flow"
+        L1["**L1: Short-Term Memory**<br/>fa:fa-bolt Active Task"]
+        L2["**L2: Medium-Term Memory**<br/>fa:fa-folder-open Project Cache"]
+        L3_VDBs["**L3: Vector Databases**<br/>fa:fa-database Semantic Search"]
+        L3_KG["**L3: Knowledge Graph**<br/>fa:fa-share-alt Relational Search"]
+        L4["**L4: Data Lake**<br/>fa:fa-cloud Deep Archive Search"]
+    end
+    
+    subgraph "Personalization"
+        UPM["**User Preferences**<br/>fa:fa-user-cog"]
+    end
+
+    MA --> L1
+    L1 --> L2
+    L2 --> L3_VDBs
+    L2 --> L3_KG
+    L3_VDBs --> L4
+    L3_KG --> L4
+    
+    MA -- "Consults for Personalization" --> UPM
+
+    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef memory_agent fill:#98FB98,stroke:#333,stroke-width:2px;
+    classDef memory_layer fill:#F5F5DC,stroke:#333,stroke-width:1px;
+    classDef personalization fill:#D8BFD8,stroke:#333,stroke-width:1px;
+
+    class M manager;
+    class MA memory_agent;
+    class L1,L2,L3_VDBs,L3_KG,L4 memory_layer;
+    class UPM personalization;
+```
 
 The "knowledge library" is a sophisticated, multi-layered system managed exclusively by a dedicated **Memory Agent**. This decouples knowledge from the reasoning agents and provides a single source of truth. The layers include:
 *   **Long-Term Storage:** A Data Lake (raw data), a Knowledge Graph (for relationships), and a fleet of domain-specific Vector Databases (for fast semantic search).
@@ -43,6 +108,30 @@ The "knowledge library" is a sophisticated, multi-layered system managed exclusi
 *   **User Preferences Memory:** A persistent profile for each user to enable hyper-personalization.
 
 ### 3.4 Learning and Evolution
+
+```mermaid
+graph TD
+    subgraph "Environment (User, Agents, Memory)"
+        S["**fa:fa-map-signs State**<br/>(User query, current context)"]
+        R["**fa:fa-trophy Reward**<br/>(User feedback, efficiency score)"]
+    end
+    
+    subgraph "The Manager (RL Agent)"
+        M["**fa:fa-sitemap Manager's Policy**<br/>(Decision-making logic)"]
+        A["**fa:fa-play-circle Action**<br/>(e.g., Delegate to Code Agent)"]
+    end
+    
+    S -- "Observe" --> M
+    M -- "Choose Action based on Policy" --> A
+    A -- "Execute Action in Environment" --> R
+    R -- "Update Policy based on Reward" --> M
+    
+    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef env fill:#F0F8FF,stroke:#333,stroke-width:1px;
+    
+    class S,R env;
+    class M,A manager;
+```
 
 OAC is designed to improve over time through a continuous learning process:
 *   **The Manager's Policy:** The Manager is an RL agent that learns optimal planning and delegation strategies. Its reward function is based on final task success, efficiency, and user feedback.

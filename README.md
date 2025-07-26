@@ -57,11 +57,11 @@ graph LR
     A1 & A2 & A3 -- "Logs & Metrics" --> META
     META -.->|"Improvement<br/>Recommendations"| M
 
-    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
-    classDef agent fill:#90EE90,stroke:#333,stroke-width:2px;
-    classDef tool fill:#F0E68C,stroke:#333,stroke-width:1px;
-    classDef meta fill:#FFA07A,stroke:#333,stroke-width:2px;
-    classDef user fill:#D8BFD8,stroke:#333,stroke-width:2px;
+    classDef manager stroke-width:2px;
+    classDef agent stroke-width:2px;
+    classDef tool stroke-width:1px;
+    classDef meta stroke-width:2px;
+    classDef user stroke-width:2px;
 
     class U user;
     class M manager;

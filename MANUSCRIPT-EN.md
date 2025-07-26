@@ -172,10 +172,10 @@ graph TD
     
     MA -- "Consults for Personalization" --> UPM
 
-    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
-    classDef memory_agent fill:#98FB98,stroke:#333,stroke-width:2px;
-    classDef memory_layer fill:#F5F5DC,stroke:#333,stroke-width:1px;
-    classDef personalization fill:#D8BFD8,stroke:#333,stroke-width:1px;
+    classDef manager stroke-width:2px;
+    classDef memory_agent stroke-width:2px;
+    classDef memory_layer stroke-width:1px;
+    classDef personalization stroke-width:1px;
 
     class M manager;
     class MA memory_agent;
@@ -245,8 +245,8 @@ graph TD
     A -- "Execute Action in Environment" --> R
     R -- "Update Policy based on Reward" --> M
     
-    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
-    classDef env fill:#F0F8FF,stroke:#333,stroke-width:1px;
+    classDef manager stroke-width:2px;
+    classDef env stroke-width:1px;
     
     class S,R env;
     class M,A manager;
@@ -343,10 +343,10 @@ graph TD
     SA4 -- "Scientific Findings" --> M2
     M2 --> End
 
-    classDef phase fill:#FFFACD,stroke:#333,stroke-width:2px;
-    classDef manager fill:#87CEEB,stroke:#333,stroke-width:2px;
-    classDef agent fill:#90EE90,stroke:#333,stroke-width:1px;
-    classDef final fill:#FFD700,stroke:#333,stroke-width:2px;
+    classDef phase stroke-width:2px;
+    classDef manager stroke-width:2px;
+    classDef agent stroke-width:1px;
+    classDef final stroke-width:2px;
 
     class Start,End final;
     class M1,M2 manager;
